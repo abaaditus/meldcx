@@ -19,4 +19,4 @@ Solution to the technical exam given...
 * [x] On the devices screen, the number of circles shown should equal the number of active devices
 
 # Bugs
-* Number of circles that orbits sometimes doesn't reflect properly even if div has the correct number based on device list -- not really well versed with animation :))
+* Number of circles that orbits sometimes doesn't reflect properly even if div has the correct number; mostly when the device list fetched is not starting from one -- Not really well versed with animation :))

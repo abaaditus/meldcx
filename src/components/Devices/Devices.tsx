@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import MeldcxInstance from '../../axios/meldx-axios';
 import { useInterval } from '../../useInterval';
 import styles from './Devices.module.css';
+import randomColor from 'randomcolor';
 
 interface IDevicesProps {
     onLogout: () => void
@@ -48,18 +49,27 @@ const Devices: React.FunctionComponent<IDevicesProps> = ({
         fetchDevices();
     }, []);
 
+    const getOrbs = () => {
+        return devices.map((value, index) => {
+            return (
+                <div
+                    className={styles.orb + " w-8 h-8 bg-red-500 rounded-full m-5"}
+                    id={'orb-' + index}
+                    key={index.toString()}>
+                    {index + 1}
+                </div >
+            );
+        })
+    };
+
     return (
         <div className="flex flex-col h-full bg-white">
             <div className="flex flex-grow text-center items-center ">
                 <div className="flex-grow">
                     <p className="text-9xl">{devices.length}</p>
                     <p className="text-4xl uppercase">devices online</p>
-                    {
-                        devices.map((value, index) => {
-                            return <div className={styles.orb + " w-12 h-12 bg-red-600 rounded-full m-5"} key={index} id={'orb-' + index}></div>;
-                        })
-                    }
                 </div>
+                {getOrbs()}
             </div>
 
             <div className="flex flex-grow-0 justify-center gap-2 py-4 font-bold bg-gray-400 bg-opacity-20">
