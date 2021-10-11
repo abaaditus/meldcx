@@ -1,24 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Login from './components/Login';
+import MeldcxInstance from './axios/meldx-axios';
 import './App.css';
+import Devices from './components/Devices/Devices';
+import { useLocalStorage } from './useStorage';
+import Modal from './components/Modal';
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useLocalStorage('isAuthenticated', '');
+  const [invalidLogin, setInvalidLogin] = useState<boolean>(false);
+
+  const handleOnLogin = async (email: string, password: string) => {
+    try {
+      await MeldcxInstance.post(`login`, {
+        email: email,
+        password: password,
+      });
+      setIsAuthenticated('true');
+      setInvalidLogin(false);
+    } catch (e) {
+      setIsAuthenticated('');
+      setInvalidLogin(true);
+    }
+  };
+
+  const handleOnLogout = async () => {
+    setIsAuthenticated('');
+  };
+
+  const handleResetLogin = async () => {
+    setInvalidLogin(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container h-screen mx-auto">
+      {
+        isAuthenticated ? <Devices onLogout={handleOnLogout} /> : <Login onLogin={handleOnLogin} />
+      }
+
+      <Modal open={invalidLogin} onClose={handleResetLogin} />
     </div>
   );
 }

@@ -1,0 +1,14 @@
+.orb {
+    position: absolute;
+    animation: orbit 5s infinite linear;
+    top: 40%;
+    left: 50%;
+}
+@keyframes orbit{
+    from {
+    transform: rotate(0deg) translateX(210px) rotate(0deg);
+    }
+    to {
+    transform: rotate(360deg) translateX(210px) rotate(-360deg);
+    }
+}
