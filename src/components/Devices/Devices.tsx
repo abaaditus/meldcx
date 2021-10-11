@@ -30,8 +30,8 @@ const Devices: React.FunctionComponent<IDevicesProps> = ({
         await MeldcxInstance.post(`notify`, {
             name: 'Kevin Villarojo',
             email: 'kebvillarojo@gmail.com',
-            repoUrl: 'kebvillarojo@gmail.com',
-            message: 'Technical Exercise :)',
+            repoUrl: 'https://github.com/abaaditus/meldcx',
+            message: 'Technical Exercise :) -- Please read the markdown file :)',
         });
     };
 
